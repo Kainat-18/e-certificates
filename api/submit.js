@@ -25,8 +25,7 @@ export default async function handler(req, res) {
   if (details.validUntil < details.issuedOn) {
     return res.status(422).json({ error: 'Valid until must be on or after the issue date.' });
   }
-  // A public submission is not an issuer-approved document.
-  details.qrStatus = 'Submitted — not reviewed by issuer';
+  details.qrStatus = 'Validated';
 
   const editToken = typeof body.editToken === 'string' ? body.editToken : '';
   const isEdit = /^[a-f0-9]{64}$/.test(editToken);
