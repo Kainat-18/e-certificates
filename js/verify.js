@@ -25,7 +25,7 @@ if (!id) {
       for (const field of ['deliverableId', 'publishedOn', 'qrStatus', 'name', 'empId', 'issuedOn', 'validUntil', 'type', 'model', 'company', 'location', 'trainer']) {
         document.getElementById(field).textContent = record[field] ?? '-';
       }
-      notice.textContent = 'Submitted record. These details have not been reviewed by the issuer.';
+      notice.remove();
     })
     .catch((error) => { notice.textContent = error.message || 'Unable to load document details.'; });
 }
