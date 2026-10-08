@@ -87,7 +87,7 @@ function renderRecords(records) {
     actionsTd.className = 'actions';
 
     const editLink = document.createElement('a');
-    editLink.href = 'form.html?edit=' + encodeURIComponent(row.token);
+    editLink.href = 'index.html?edit=' + encodeURIComponent(row.token);
     editLink.textContent = 'Edit';
     actionsTd.append(editLink);
 
@@ -155,10 +155,10 @@ form.addEventListener('submit', async (event) => {
     const data = await response.json();
     if (!response.ok) throw new Error(data.error || 'Unable to save your details.');
     if (editTokenInput.value) {
-      window.location.href = 'form.html?updated=1';
+      window.location.href = 'index.html?updated=1';
       return;
     }
-    const url = new URL('index.html', window.location.href);
+    const url = new URL('verify.html', window.location.href);
     url.searchParams.set('id', data.id);
     const link = document.getElementById('recordLink');
     link.href = url.href;

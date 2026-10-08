@@ -1,140 +1,50 @@
-﻿<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html;charset=UTF-8"> 
-
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<title>Authenticate your Document</title>
-    
-    <link type="text/css" rel="stylesheet" href="css/qrc-lib.min-3.1.6.css.css">
-    <link type="text/css" rel="stylesheet" href="css/qrc-industry.min-3.1.6.css.css">
-    <!--[if IE 8]>
-            <script src="/js/qrc-ie8-after.min-3.1.6.js.gz"></script>
-    <![endif]-->
-<style>
-    ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-@media (min-width: 260px) {
-    ul li {
-       /* padding-left: 210px;*/
-           }
-   
-}
-
-ul li {
-    padding-right: 40px;
-}
-
-@media (min-width: 260px) {
-    ul li span:first-child {
-        display: block;
-      /*  margin-left: -210px;*/
-    }
-}
-@media (max-width: 500px) {
-    ul li span:first-child {
-    font-weight: bold;
-   
-   /* width: 210px;*/
-}
-}
-
-ul li span:first-child {
-    font-weight: bold;
-   
-   /* width: 210px;*/
-}
-
-</style></head>
-
-<!--[if IE 8 ]> <body class="ie8"> <![endif]-->
-<!--[if (gt IE 8)|!(IE)]><!--> <body> <!--<![endif]-->
-
-    <!--  Header Starts -->
-    <header class="qrc-header">
-
-
-<div class="col-xs-9 col-sm-10 qrc-app-logo-container">
-    <div class="pull-left qrc-app-logo">
-      <img src="images/fingerprint.png" alt="Authenticate your Document">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit document details</title>
+  <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+<main>
+  <h1>Submit document details</h1>
+  <p>Complete the form to save your details and receive a unique record link. Submission does not confirm approval by the document issuer.</p>
+  <p id="updatedNotice" hidden>Record updated successfully.</p>
+  <p id="editNotice" hidden>Editing existing record. <a href="index.html">Cancel and create a new record instead</a>.</p>
+  <form id="documentForm">
+    <input type="hidden" name="editToken" id="editToken" value="">
+    <div class="trap" aria-hidden="true"><label>Leave empty<input name="website" id="website" tabindex="-1" autocomplete="off"></label></div>
+    <div class="fields">
+      <label for="deliverableId">Deliverable ID<input id="deliverableId" name="deliverableId" type="text" maxlength="200" required></label>
+      <label for="publishedOn">Published on<input id="publishedOn" name="publishedOn" type="date" maxlength="200" required></label>
+      <label for="name">Name<input id="name" name="name" type="text" maxlength="200" required></label>
+      <label for="empId">ID<input id="empId" name="empId" type="text" maxlength="200" required></label>
+      <label for="issuedOn">Issued on<input id="issuedOn" name="issuedOn" type="date" maxlength="200" required></label>
+      <label for="validUntil">Valid until<input id="validUntil" name="validUntil" type="date" maxlength="200" required></label>
+      <label for="type">Type<input id="type" name="type" type="text" maxlength="200" required></label>
+      <label for="model">Model<input id="model" name="model" type="text" maxlength="200" value="N/A" required></label>
+      <label for="company">Company<input id="company" name="company" type="text" maxlength="200" value="Private" required></label>
+      <label for="location">Training location<input id="location" name="location" type="text" maxlength="200" value="Jubail" required></label>
+      <label for="trainer">Trainer<input id="trainer" name="trainer" type="text" maxlength="200" value="Ahmad Nazeer" required></label>
     </div>
-    <div>
-        <div class="qrc-app-logo-text"><b>Authenticate </b><span>your document<span></span></span></div>
-        <div class="qrc-app-logo-desc"><span>View your submitted document details below.</span><br><span>Use your unique record link to view the details.</span></div>
-</div>
+    <button id="submitButton" type="submit">Save details and generate link</button>
+  </form>
+  <p id="message" role="status" aria-live="polite"></p>
+  <section id="result" hidden>
+    <h2>Your record link</h2>
+    <a id="recordLink" href=""></a>
+    <button id="copyLink" type="button">Copy link</button>
+    <p>Keep this link. Anyone with the link can view the submitted details.</p>
+  </section>
 
-    </div></header>
-    <!--  Header Ends -->
-    <!--  Content Starts -->
-    <div class="qrc-content">
-    
-<div class="qrc-bg-cover">
-	 <!--  This image is only visible for IE8 -->
-	<img id="background-image" src="images/background_industry.jpg" alt="Authenticate your Document">
-</div>
-
-
-<div class="row qrc-code-container">
-    <div class="qrc-code-reader">
-        <div class="qrc-code-reader-header">
-
-            <img class="state-background" src="images/content_industry_top.png" alt="CONTENT_TOP">
-                                    <img class="state-icon" src="images/circle_success.png" alt="Success">
-                     </div>
-         
-        <div class="qrc-code-reader-content">
-             
-            
-<ul>
-    <li><span>Deliverable Id : </span><span id="deliverableId">-</span></li>
-      <li><span>Published on : </span><span id="publishedOn">-</span></li>
-      <li><span>QR Code Status : </span><span id="qrStatus">-</span></li>
-      <li><span>NAME : </span><span id="name">-</span></li>
-      <li><span>ID : </span><span id="empId">-</span></li>
-      <li><span>ISSUED ON : </span><span id="issuedOn">-</span></li>
-      <li><span>VALID UNTIL : </span><span id="validUntil">-</span></li>
-      <li><span>TYPE : </span><span id="type">-</span></li>
-      <li><span>MODEL : </span><span id="model">-</span></li>
-      <li><span>COMPANY : </span><span id="company">-</span></li>
-      <li><span>TRAINING LOCATION : </span><span id="location">-</span></li>
-      <li><span>TRAINER : </span><span id="trainer">-</span></li>
-    </ul>
-                
-                
-                
-           <div class="qrc-code-reader-disclaimer">
-                                For any further information on this document, please contact the issuer of the document.
-                            </div> 
-                      
-        </div>
-        <div class="qrc-code-reader-footer">
-            <img src="images/content_industry_bottom.png" alt="Success">
-        </div>
-    </div>
-</div>
-
-    </div>
-    <!--  Content Ends -->
-
-    <!--  Footer Starts -->
-    <footer class="qrc-footer">
-        
-
-
-
-
-
-
-
-<ul class="qrc-bv-footer-links">
-    <li><a href="https://group.bureauveritas.com/" target="_blank">Visit<b>Bureau Veritas Website</b></a></li>
-</ul>
-
-    </footer>
-    <!-- Footer Ends -->
-<script src="js/verify.js"></script>
-</body></html>
-
+  <h2>Submitted records</h2>
+  <p id="recordsEmpty" hidden>No records yet.</p>
+  <table class="records" id="recordsTable" hidden>
+    <thead><tr><th>Deliverable ID</th><th>Name</th><th>Company</th><th>Issued on</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody id="recordsBody"></tbody>
+  </table>
+</main>
+<script src="js/form.js"></script>
+</body>
+</html>

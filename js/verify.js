@@ -9,7 +9,7 @@ const id = new URLSearchParams(window.location.search).get('id');
 if (!id) {
   notice.textContent = 'Open your unique record link to view document details.';
   const link = document.createElement('a');
-  link.href = 'form.html';
+  link.href = 'index.html';
   link.textContent = 'Submit document details';
   link.style.color = '#192b62';
   notice.append(document.createElement('br'), link);
