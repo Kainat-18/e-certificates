@@ -8,6 +8,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ deliverableId: `151-${year}-${number}-EN` });
   } catch (error) {
     console.error('Deliverable ID counter error:', error);
-    return res.status(200).json({ deliverableId: '' });
+    return res.status(200).json({ deliverableId: '', debug: String(error && error.message || error) });
   }
 }
