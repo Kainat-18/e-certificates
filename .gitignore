@@ -1,0 +1,8 @@
+node_modules/
+.vercel
+.env
+.env.local
+
+# Legacy Hostinger files contain real database/Supabase credentials in plaintext — never commit these.
+legacy-hostinger-php/config.php
+legacy-hostinger-php/supabase-config.php

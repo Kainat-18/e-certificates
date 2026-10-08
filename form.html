@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit document details</title>
+  <link rel="stylesheet" href="css/form.css">
+</head>
+<body>
+<main>
+  <h1>Submit document details</h1>
+  <p>Complete the form to save your details and receive a unique record link. Submission does not confirm approval by the document issuer.</p>
+  <p id="updatedNotice" hidden>Record updated successfully.</p>
+  <p id="editNotice" hidden>Editing existing record. <a href="form.html">Cancel and create a new record instead</a>.</p>
+  <form id="documentForm">
+    <input type="hidden" name="editToken" id="editToken" value="">
+    <div class="trap" aria-hidden="true"><label>Leave empty<input name="website" id="website" tabindex="-1" autocomplete="off"></label></div>
+    <div class="fields">
+      <label for="deliverableId">Deliverable ID<input id="deliverableId" name="deliverableId" type="text" maxlength="200" required></label>
+      <label for="publishedOn">Published on<input id="publishedOn" name="publishedOn" type="date" maxlength="200" required></label>
+      <label for="name">Name<input id="name" name="name" type="text" maxlength="200" required></label>
+      <label for="empId">ID<input id="empId" name="empId" type="text" maxlength="200" required></label>
+      <label for="issuedOn">Issued on<input id="issuedOn" name="issuedOn" type="date" maxlength="200" required></label>
+      <label for="validUntil">Valid until<input id="validUntil" name="validUntil" type="date" maxlength="200" required></label>
+      <label for="type">Type<input id="type" name="type" type="text" maxlength="200" required></label>
+      <label for="model">Model<input id="model" name="model" type="text" maxlength="200" value="N/A" required></label>
+      <label for="company">Company<input id="company" name="company" type="text" maxlength="200" value="Private" required></label>
+      <label for="location">Training location<input id="location" name="location" type="text" maxlength="200" value="Jubail" required></label>
+      <label for="trainer">Trainer<input id="trainer" name="trainer" type="text" maxlength="200" value="Ahmad Nazeer" required></label>
+    </div>
+    <button id="submitButton" type="submit">Save details and generate link</button>
+  </form>
+  <p id="message" role="status" aria-live="polite"></p>
+  <section id="result" hidden>
+    <h2>Your record link</h2>
+    <a id="recordLink" href=""></a>
+    <button id="copyLink" type="button">Copy link</button>
+    <p>Keep this link. Anyone with the link can view the submitted details.</p>
+  </section>
+
+  <h2>Submitted records</h2>
+  <p id="recordsEmpty" hidden>No records yet.</p>
+  <table class="records" id="recordsTable" hidden>
+    <thead><tr><th>Deliverable ID</th><th>Name</th><th>Company</th><th>Issued on</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody id="recordsBody"></tbody>
+  </table>
+</main>
+<script src="js/form.js"></script>
+</body>
+</html>
